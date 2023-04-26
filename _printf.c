@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdarg.h>
 #include <stdio.h>
-
+#include <string.h>
 /**
  * _printf - prints formatted output to stdout
  * @format: format string
@@ -11,6 +11,7 @@
 int _printf(const char *format, ...)
 {
 int output = 0;
+int i;
 va_list args;
 va_start(args, format);
 
@@ -24,10 +25,26 @@ if (*format == 's')
 const char *str = va_arg(args, const char *);
 output += printf("%s", str);
 }
-else if (*format == 'r')
+else if (*format == 'b')
 {
-const char *str = va_arg(args, const char *);
-output += printf("%r", str);
+unsigned int num = va_arg(args, unsigned int);
+int binary[32], i = 0;
+while (num > 0)
+{
+binary[i] = num % 2;
+num /= 2;
+i++;
+}
+if (i == 0)
+{
+binary[i] = 0;
+i++;
+}
+output += i;
+while (--i >= 0)
+{
+output += printf("%d", binary[i]);
+}
 }
 else if (*format == 'c')
 {
@@ -63,6 +80,15 @@ else if (*format == 'X')
 {
 unsigned int num = va_arg(args, unsigned int);
 output += printf("%X", num);
+}
+else if (*format == 'r')
+{
+const char *str = va_arg(args, const char *);
+int len = strlen(str);
+for (i = len - 1; i >= 0; i--)
+{
+output += printf("%c", str[i]);
+}
 }
 else if (*format == '%')
 {
