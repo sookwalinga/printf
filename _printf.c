@@ -1,5 +1,6 @@
-#include "main.h"
 #include <stdarg.h>
+#include <string.h>
+#include <stdio.h>
 
 /**
  * _printf - prints formatted output to stdout
@@ -8,9 +9,8 @@
  */
 int _printf(const char *format, ...)
 {
+int num_printed = 0;
 va_list args;
-int count = 0;
-
 va_start(args, format);
 
 while (*format != '\0')
@@ -18,38 +18,53 @@ while (*format != '\0')
 if (*format == '%')
 {
 format++;
-if (*format == 'c')
+if (*format == 's')
 {
-char c = (char) va_arg(args, int);
-putchar(c);
-count++;
+const char *str = va_arg(args, const char *);
+num_printed += printf("%s", str);
 }
-else if (*format == 's')
+else if (*format == 'c')
 {
-char *str = va_arg(args, char *);
-fputs(str, stdout);
+int c = va_arg(args, int);
+num_printed += printf("%c", c);
+}
+else if (*format == 'd' || *format == 'i')
+{
+int num = va_arg(args, int);
+num_printed += printf("%d", num);
+}
+else if (*format == 'u')
+{
+unsigned int num = va_arg(args, unsigned int);
+num_printed += printf("%u", num);
+}
+else if (*format == 'o')
+{
+unsigned int num = va_arg(args, unsigned int);
+num_printed += printf("%o", num);
+}
+else if (*format == 'x')
+{
+unsigned int num = va_arg(args, unsigned int);
+num_printed += printf("%x", num);
+}
+else if (*format == 'X')
+{
+unsigned int num = va_arg(args, unsigned int);
+num_printed += printf("%X", num);
 }
 else if (*format == '%')
 {
-putchar('%');
-count++;
-}
-else
-{
-putchar('%');
-putchar(*format);
-count += 2;
+num_printed += printf("%%");
 }
 }
-else
+else 
 {
 putchar(*format);
-count++;
+num_printed++;
 }
 format++;
 }
-
 va_end(args);
-
-return (count);
+return (num_printed);
 }
