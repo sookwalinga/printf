@@ -4,7 +4,7 @@
 /**
  * _printf - prints formatted output to stdout
  * @format: format string
- * Return: number of characters printed (excluding null byte)
+ * Return: num of x-ters printed (without null byte)
  */
 int _printf(const char *format, ...)
 {
