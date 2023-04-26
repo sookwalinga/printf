@@ -1,5 +1,6 @@
-#include "main.h"
+#include <stdio.h>
 #include <stdarg.h>
+#include <string.h>
 
 /**
  * _printf - prints formatted output to stdout
@@ -8,41 +9,31 @@
  */
 int _printf(const char *format, ...)
 {
-va_list args;
 int count = 0;
-
+va_list args;
 va_start(args, format);
 
-while (*format != '\0')
-{
-if (*format == '%')
-{
+while (*format) {
+if (*format == '%') {
 format++;
-if (*format == 'c')
-{
-char c = (char) va_arg(args, int);
-putchar(c);
+switch (*format) {
+case 'c':
+putchar(va_arg(args, int));
 count++;
-}
-else if (*format == 's')
-{
-char *str = va_arg(args, char *);
-fputs(str, stdout);
-}
-else if (*format == '%')
-{
+break;
+case 's':
+fputs(va_arg(args, char*), stdout);
+count += strlen(va_arg(args, char*));
+break;
+case '%':
 putchar('%');
 count++;
+break;
+default:
+fprintf(stderr, "Invalid conversion specifier: %%%c\n", *format);
+return (-1);
 }
-else
-{
-putchar('%');
-putchar(*format);
-count += 2;
-}
-}
-else
-{
+} else {
 putchar(*format);
 count++;
 }
@@ -50,6 +41,5 @@ format++;
 }
 
 va_end(args);
-
 return (count);
 }
