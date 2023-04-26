@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /**
- * my_printf - prints formatted output to stdout
+ * _printf - prints formatted output to stdout
  * @format: format string
  *
  * Return: number of characters printed
