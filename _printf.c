@@ -1,6 +1,9 @@
 #include <stdarg.h>
 #include <string.h>
+<<<<<<< HEAD
 #include <stdio.h>
+=======
+>>>>>>> 5db05da590c792f26d989ab9c2e0a3195f86b340
 
 /**
  * _printf - prints formatted output to stdout
@@ -18,10 +21,17 @@ while (*format != '\0')
 if (*format == '%')
 {
 format++;
+<<<<<<< HEAD
 if (*format == 's')
 {
 const char *str = va_arg(args, const char *);
 num_printed += printf("%s", str);
+=======
+switch (*format) {
+case 'c':
+putchar(va_arg(args, int));
+count++;
+>>>>>>> 5db05da590c792f26d989ab9c2e0a3195f86b340
 }
 else if (*format == 'c')
 {
@@ -33,6 +43,7 @@ else if (*format == 'd' || *format == 'i')
 int num = va_arg(args, int);
 num_printed += printf("%d", num);
 }
+<<<<<<< HEAD
 else if (*format == 'u')
 {
 unsigned int num = va_arg(args, unsigned int);
@@ -60,6 +71,9 @@ num_printed += printf("%%");
 }
 else 
 {
+=======
+} else {
+>>>>>>> 5db05da590c792f26d989ab9c2e0a3195f86b340
 putchar(*format);
 num_printed++;
 }
