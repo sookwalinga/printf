@@ -28,7 +28,6 @@ else if (*format == 's')
 {
 char *str = va_arg(args, char *);
 fputs(str, stdout);
-// count += strlen(str);
 }
 else if (*format == '%')
 {
