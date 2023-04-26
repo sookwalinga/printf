@@ -1,7 +1,6 @@
 #include "main.h"
 #include <stdarg.h>
 
-
 /**
  * print_integer - Prints an integer to the console
  *
@@ -12,9 +11,4 @@ void print_integer(int num)
 printf("%d", num);
 }
 
-int main(void)
-{
-int num = 42;
-print_integer(num); /* Will output "42" */
-return (0);
-}
+/* Remove the main function from this file */
