@@ -10,5 +10,3 @@ void print_integer(int num)
 {
 printf("%d", num);
 }
-
-/* Remove the main function from this file */
