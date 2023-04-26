@@ -1,6 +1,9 @@
-#include <stdio.h>
+#include "main.h"
 #include <stdarg.h>
+<<<<<<< HEAD
 #include <string.h>
+=======
+>>>>>>> 18f8f6b48f7b03424ea6e9ff59dd54bbb700282d
 
 /**
  * _printf - prints formatted output to stdout
@@ -9,31 +12,51 @@
  */
 int _printf(const char *format, ...)
 {
-int count = 0;
 va_list args;
+int count = 0;
+
 va_start(args, format);
 
-while (*format) {
-if (*format == '%') {
+while (*format != '\0')
+{
+if (*format == '%')
+{
 format++;
+<<<<<<< HEAD
 switch (*format) {
 case 'c':
 putchar(va_arg(args, int));
+=======
+if (*format == 'c')
+{
+char c = (char) va_arg(args, int);
+putchar(c);
+>>>>>>> 18f8f6b48f7b03424ea6e9ff59dd54bbb700282d
 count++;
-break;
-case 's':
-fputs(va_arg(args, char*), stdout);
-count += strlen(va_arg(args, char*));
-break;
-case '%':
+}
+else if (*format == 's')
+{
+char *str = va_arg(args, char *);
+fputs(str, stdout);
+}
+else if (*format == '%')
+{
 putchar('%');
 count++;
-break;
-default:
-fprintf(stderr, "Invalid conversion specifier: %%%c\n", *format);
-return (-1);
 }
+<<<<<<< HEAD
 } else {
+=======
+else
+{
+putchar('%');
+putchar(*format);
+count += 2;
+}
+}
+else
+{
+>>>>>>> 18f8f6b48f7b03424ea6e9ff59dd54bbb700282d
 putchar(*format);
 count++;
 }
@@ -41,5 +64,6 @@ format++;
 }
 
 va_end(args);
+
 return (count);
 }
