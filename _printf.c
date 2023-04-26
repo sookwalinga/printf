@@ -1,43 +1,6 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
-<<<<<<< HEAD
-=======
-
-/**
- * print_char - prints a single character to stdout
- * @args: va_list containing the character to print
- * @count: pointer to the character count
- */
-void print_char(va_list args, int *count)
-{
-char c = (char) va_arg(args, int);
-putchar(c);
-(*count)++;
-}
-
-/**
- * print_string - prints a string to stdout
- * @args: va_list containing the string to print
- * @count: pointer to the character count
- */
-void print_string(va_list args, int *count)
-{
-char *str = va_arg(args, char *);
-fputs(str, stdout);
-(*count) += strlen(str);
-}
-
-/**
- * print_percent - prints a percent sign to stdout
- * @count: pointer to the character count
- */
-void print_percent(int *count)
-{
-putchar('%');
-(*count)++;
-}
->>>>>>> e959d3f920e44a970c1710022a46b676092732a5
 
 /**
  * _printf - prints formatted output to stdout
@@ -53,7 +16,6 @@ va_start(args, format);
 while (*format) {
 if (*format == '%') {
 format++;
-<<<<<<< HEAD
 switch (*format) {
 case 'c':
 putchar(va_arg(args, int));
@@ -72,23 +34,6 @@ fprintf(stderr, "Invalid conversion specifier: %%%c\n", *format);
 return (-1);
 }
 } else {
-=======
-if (*format == 'c')
-print_char(args, &count);
-else if (*format == 's')
-print_string(args, &count);
-else if (*format == '%')
-print_percent(&count);
-else
-{
-print_percent(&count);
-putchar(*format);
-count++;
-}
-}
-else
-{
->>>>>>> e959d3f920e44a970c1710022a46b676092732a5
 putchar(*format);
 count++;
 }
