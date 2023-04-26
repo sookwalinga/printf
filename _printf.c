@@ -1,6 +1,8 @@
-#include "main.h"
+#include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+<<<<<<< HEAD
+=======
 
 /**
  * print_char - prints a single character to stdout
@@ -35,6 +37,7 @@ void print_percent(int *count)
 putchar('%');
 (*count)++;
 }
+>>>>>>> e959d3f920e44a970c1710022a46b676092732a5
 
 /**
  * _printf - prints formatted output to stdout
@@ -43,16 +46,33 @@ putchar('%');
  */
 int _printf(const char *format, ...)
 {
-va_list args;
 int count = 0;
-
+va_list args;
 va_start(args, format);
 
-while (*format != '\0')
-{
-if (*format == '%')
-{
+while (*format) {
+if (*format == '%') {
 format++;
+<<<<<<< HEAD
+switch (*format) {
+case 'c':
+putchar(va_arg(args, int));
+count++;
+break;
+case 's':
+fputs(va_arg(args, char*), stdout);
+count += strlen(va_arg(args, char*));
+break;
+case '%':
+putchar('%');
+count++;
+break;
+default:
+fprintf(stderr, "Invalid conversion specifier: %%%c\n", *format);
+return (-1);
+}
+} else {
+=======
 if (*format == 'c')
 print_char(args, &count);
 else if (*format == 's')
@@ -68,6 +88,7 @@ count++;
 }
 else
 {
+>>>>>>> e959d3f920e44a970c1710022a46b676092732a5
 putchar(*format);
 count++;
 }
@@ -75,6 +96,5 @@ format++;
 }
 
 va_end(args);
-
 return (count);
 }
