@@ -58,13 +58,15 @@ else if (*format == '%')
 num_printed += printf("%%");
 }
 }
-else 
+else
 {
 putchar(*format);
 num_printed++;
 }
 format++;
 }
+
 va_end(args);
+
 return (num_printed);
 }
