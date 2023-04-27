@@ -20,4 +20,6 @@ void print_hex(unsigned char num);
 
 int _printHex(const char *format, ...);
 
-#endif
+int print_pointer(void *ptr);
+
+#endif /*MAIN_H*/
