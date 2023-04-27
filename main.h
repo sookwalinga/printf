@@ -18,7 +18,6 @@ int _printS(const char *format, ...);
 int write_buffered(char *str);
 
 // For task No. 5.
-void print_hex(unsigned char num);
 int _printHex(const char *format, ...);
 
 #endif /* MAIN_H */
