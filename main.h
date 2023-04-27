@@ -22,6 +22,6 @@ int _printHex(const char *format, ...);
 
 int print_pointer(void *ptr);
 
-char *handle_flags(const char *flags, char *result);
+int handle_flags(const char *format, int *i);
 
 #endif /*MAIN_H*/

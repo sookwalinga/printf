@@ -1,95 +1,39 @@
 #include "main.h"
-#include <stdarg.h>
+#define F_MINUS 1
+#define F_PLUS 2
+#define F_ZERO 4
+#define F_HASH 8
+#define F_SPACE 16
 
 /**
- * add_plus_flag - adds the + flag to the result
- * @result: a string containing the result of the conversion
- *
- * Return: a new string with the + flag applied to the result, or NULL
+ * handle_flags - Calculates active flags
+ * @format: Formatted string in which to print the arguments
+ * @i: take a parameter.
+ * Return: Flags:
  */
-static char *add_plus_flag(char *result)
+int handle_flags(const char *format, int *i)
 {
-char *formatted_result = NULL;
-if (result[0] != '-')
-{
-formatted_result = malloc(strlen(result) + 2);
-sprintf(formatted_result, "+%s", result);
-}
-return (formatted_result);
-}
+/* - + 0 # ' ' */
+/* 1 2 4 8  16 */
+int j, curr_i;
+int flags = 0;
+const char FLAGS_CH[] = {'-', '+', '0', '#', ' ', '\0'};
+const int FLAGS_ARR[] = {F_MINUS, F_PLUS, F_ZERO, F_HASH, F_SPACE, 0};
 
-/**
- * add_space_flag - adds the space flag to the result
- * @result: a string containing the result of the conversion
- *
- * Return: a new string with the space flag applied to the result, or NULL
- */
-static char *add_space_flag(char *result)
+for (curr_i = *i + 1; format[curr_i] != '\0'; curr_i++)
 {
-char *formatted_result = NULL;
-if (result[0] != '-')
+for (j = 0; FLAGS_CH[j] != '\0'; j++)
+if (format[curr_i] == FLAGS_CH[j])
 {
-formatted_result = malloc(strlen(result) + 2);
-sprintf(formatted_result, " %s", result);
-}
-return (formatted_result);
-}
-
-/**
- * add_hash_flag - adds the # flag to the result
- * @result: a string containing the result of the conversion
- *
- * Return: a new string with the # flag applied to the result, or NULL
- */
-static char *add_hash_flag(char *result)
-{
-char *formatted_result = NULL;
-switch (result[0])
-{
-case 'x':
-case 'X':
-formatted_result = malloc(strlen(result) + 3);
-sprintf(formatted_result, "0%s", result);
-break;
-case 'o':
-if (result[1] != '0')
-{
-formatted_result = malloc(strlen(result) + 2);
-sprintf(formatted_result, "0%s", result);
-}
-break;
-default:
+flags |= FLAGS_ARR[j];
 break;
 }
-return (formatted_result);
+
+if (FLAGS_CH[j] == 0)
+break;
 }
 
-/**
- * handle_flags - handle +, space, and # flags for conv. specifiers
- * @flags: a string containing the flags to handle
- * @result: a string containing the result of the conversion
- *
- * Return: a string containing the result with the flags applied
- */
-char *handle_flags(const char *flags, char *result)
-{
-char *formatted_result = NULL;
-if (strchr(flags, '+'))
-{
-formatted_result = add_plus_flag(result);
-}
-else if (strchr(flags, ' '))
-{
-formatted_result = add_space_flag(result);
-}
-else if (strchr(flags, '#'))
-{
-formatted_result = add_hash_flag(result);
-}
-if (!formatted_result)
-{
-return (result);
-}
-free(result);
-return (formatted_result);
+*i = curr_i - 1;
+
+return (flags);
 }
