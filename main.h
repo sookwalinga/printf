@@ -11,7 +11,9 @@
 
 int _printf(const char *format, ...);
 void print_integer(int num);
-void print_binary(unsigned int n);
+
+void print_binary(unsigned int num);
+void prints_specifier(char c, unsigned int num);
 
 void print_specifier(char c, unsigned int num);
 
