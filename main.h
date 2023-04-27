@@ -12,6 +12,9 @@
 int _printf(const char *format, ...);
 void print_integer(int num);
 void print_binary(unsigned int n);
+
+void print_specifier(char c, unsigned int num);
+
 int _printS(const char *format, ...);
 
 int write_buffered(char *str);
