@@ -1,7 +1,8 @@
 #include "main.h"
 #include <stdarg.h>
+
 /**
- * handle_flags - handles the +, space, and # flags for non-custom conversion specifiers
+ * handle_flags - handle +, space, and # flags for conv. specifiers
  * @flags: a string containing the flags to handle
  * @result: a string containing the result of the conversion
  *
@@ -10,7 +11,7 @@
 char *handle_flags(const char *flags, char *result)
 {
 char *formatted_result = NULL;
-// handle the + flag
+/* handle the + flag */
 if (strchr(flags, '+'))
 {
 if (result[0] != '-')
@@ -19,7 +20,7 @@ formatted_result = malloc(strlen(result) + 2);
 sprintf(formatted_result, "+%s", result);
 }
 }
-// handle the space flag
+/* handle the space flag */
 else if (strchr(flags, ' '))
 {
 if (result[0] != '-')
@@ -28,7 +29,7 @@ formatted_result = malloc(strlen(result) + 2);
 sprintf(formatted_result, " %s", result);
 }
 }
-// handle the # flag
+/* handle the # flag */
 else if (strchr(flags, '#'))
 {
 switch (result[0])
@@ -49,10 +50,11 @@ default:
 break;
 }
 }
-// if no flags were applied, return the original result
+/* if no flags were applied, return the original result */
 if (!formatted_result)
-return result;
-// free the original result and return the formatted result
+return (result);
+
+/* free the original result and return the formatted result */
 free(result);
 return (formatted_result);
 }
