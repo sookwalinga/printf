@@ -11,7 +11,6 @@
 int _printf(const char *format, ...)
 {
 int output = 0;
-int i;
 va_list args;
 va_start(args, format);
 
@@ -80,15 +79,6 @@ else if (*format == 'X')
 {
 unsigned int num = va_arg(args, unsigned int);
 output += printf("%X", num);
-}
-else if (*format == 'r')
-{
-const char *str = va_arg(args, const char *);
-int len = strlen(str);
-for (i = len - 1; i >= 0; i--)
-{
-output += printf("%c", str[i]);
-}
 }
 else if (*format == '%')
 {
