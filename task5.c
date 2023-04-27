@@ -12,7 +12,6 @@ if (num < 16)
 putchar('0');
 printf("%X", num);
 }
-
 /**
  * print_string - prints a string
  * @str: the string to print
@@ -44,7 +43,6 @@ printf("%d", num);
 int handle_conversion(const char **p, va_list args)
 {
 int count = 0;
-
 /* handle %S */
 if (**p == 'S')
 {
@@ -66,10 +64,8 @@ else
 {
 /* ... */
 }
-
 return (count);
 }
-
 /**
  * _printHex - custom implementation of printf
  * @format: the format string
@@ -82,9 +78,7 @@ int _printHex(const char *format, ...)
 va_list args;
 int count = 0;
 const char *p = format;
-
 va_start(args, format);
-
 while (*p != '\0')
 {
 if (*p != '%')
@@ -93,11 +87,8 @@ putchar(*p++);
 count++;
 continue;
 }
-
 count += handle_conversion(&p, args);
 }
-
 va_end(args);
-
 return (count);
 }
