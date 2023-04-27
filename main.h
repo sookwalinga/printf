@@ -13,5 +13,6 @@ int _printf(const char *format, ...);
 void print_integer(int num);
 void print_binary(unsigned int n);
 int _printS(const char *format, ...);
+int write_buffered(char *str);
 
 #endif /* MAIN_H */
