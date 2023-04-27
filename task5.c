@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdarg.h>
-#include <stdio.h>
 
 /**
  * print_hex - prints a hexadecimal number with at least 2 digits
