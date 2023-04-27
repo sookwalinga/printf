@@ -28,22 +28,28 @@ const char *p = format;
 
 va_start(args, format);
 
-while (*p != '\0') {
-if (*p != '%') {
+while (*p != '\0') 
+{
+if (*p != '%') 
+{
 putchar(*p++);
 count++;
 continue;
 }
 
 /* handle %S */
-if (*(p + 1) == 'S') {
+if (*(p + 1) == 'S') 
+{
 char *str = va_arg(args, char *);
-while (*str != '\0') {
-if (*str < ' ' || *str >= 127) {
+while (*str != '\0') 
+{
+if (*str < ' ' || *str >= 127) 
+{
 printf("\\x");
 print_hex(*str);
 count += 4;
-} else {
+} else 
+{
 putchar(*str);
 count++;
 }
