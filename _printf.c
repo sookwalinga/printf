@@ -1,6 +1,4 @@
-#include <stdarg.h>
-#include <stdio.h>
-#include <string.h>
+#include "main.h"
 
 #define BUFFER_SIZE 1024
 
@@ -13,13 +11,63 @@ int _printf(const char *format, ...)
 {
 int i, j;
 int output = 0;
+int width, precision;
+char specifier, padding;
+
 va_list args;
 va_start(args, format);
+
 while (*format != '\0')
 {
 if (*format == '%')
 {
 format++;
+
+specifier = *(++format);
+width = 0;
+precision = -1;
+padding = ' ';
+
+if (specifier == '-')
+{
+padding = '-';
+specifier = *(++format);
+}
+
+if (specifier == '0')
+{
+padding = '0';
+specifier = *(++format);
+}
+
+while (isdigit(specifier))
+{
+width = 10 * width + (specifier - '0');
+specifier = *(++format);
+}
+
+if (specifier == '.')
+{
+specifier = *(++format);
+precision = 0;
+while (isdigit(specifier))
+{
+precision = 10 * precision + (specifier - '0');
+specifier = *(++format);
+}
+}
+
+if (padding == '-' && width > 0)
+{
+putchar(*format);
+output++;
+for (i = 1; i < width; i++)
+{
+putchar(' ');
+output++;
+}
+}
+
 if (*format == 's')
 {
 const char *str = va_arg(args, const char *);
