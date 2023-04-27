@@ -14,7 +14,7 @@ printf("%X", num);
 }
 
 /**
- * _printf - custom implementation of printf
+ * _printHex - custom implementation of printf
  * @format: the format string
  * @...: the arguments to print
  *
