@@ -5,7 +5,7 @@
 /**
  * _printf - prints formatted output to stdout
  * @format: format string
- * Return: num of characters printed
+ * Return: input of characters printed
  */
 int _printf(const char *format, ...)
 {
@@ -71,28 +71,28 @@ output += printf("%c", c);
 }
 else if (*format == 'd' || *format == 'i')
 {
-int num = va_arg(args, int);
-output += printf("%d", num);
+int input = va_arg(args, int);
+output += printf("%d", input);
 }
 else if (*format == 'u')
 {
-unsigned int num = va_arg(args, unsigned int);
-output += printf("%u", num);
+unsigned int input = va_arg(args, unsigned int);
+output += printf("%u", input);
 }
 else if (*format == 'o')
 {
-unsigned int num = va_arg(args, unsigned int);
-output += printf("%o", num);
+unsigned int input = va_arg(args, unsigned int);
+output += printf("%o", input);
 }
 else if (*format == 'x')
 {
-unsigned int num = va_arg(args, unsigned int);
-output += printf("%x", num);
+unsigned int input = va_arg(args, unsigned int);
+output += printf("%x", input);
 }
 else if (*format == 'X')
 {
-unsigned int num = va_arg(args, unsigned int);
-output += printf("%X", num);
+unsigned int input = va_arg(args, unsigned int);
+output += printf("%X", input);
 }
 else if (*format == 'p')
 {
@@ -101,17 +101,17 @@ output += printf("%p", ptr);
 }
 else if (*format == 'b')
 {
-unsigned int num = va_arg(args, unsigned int);
+unsigned int input = va_arg(args, unsigned int);
 int binary[32], i = 0;
 
-if(num == 0)
+if (input == 0)
 {
-output += printf("%u", num);
+output += printf("%u", input);
 }
-while (num > 0)
+while (input > 0)
 {
-binary[i] = num % 2;
-num /= 2;
+binary[i] = input % 2;
+input /= 2;
 i++;
 }
 for (j = i - 1; j >= 0; j--)
@@ -125,12 +125,15 @@ const char *str = va_arg(args, const char *);
 int len = strlen(str);
 for (i = len - 1; i >= 0; i--)
 {
-output += printf("%c", str[i]);
+output += printf("%s", str[i]);
 }
 }
 else if (*format == '%')
 {
 output += printf("%%");
+}
+else{
+output += printf("%s", format);
 }
 }
 else
@@ -143,3 +146,4 @@ format++;
 va_end(args);
 return (output);
 }
+
