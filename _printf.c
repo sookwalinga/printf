@@ -3,15 +3,56 @@
 #include <stdio.h>
 
 /**
+ * print_char - Print a single character to stdout
+ * @c: The character to print
+ * Return: 1 (always)
+ */
+int print_char(char c)
+{
+putchar(c);
+return (1);
+}
+
+/**
+ * print_str - Print a string to stdout
+ * @str: The string to print
+ * Return: The number of characters printed
+ */
+int print_str(char *str)
+{
+int count = 0;
+
+while (*str != '\0')
+{
+putchar(*str);
+count++;
+str++;
+}
+
+return (count);
+}
+
+/**
+ * print_percent - Print a percent sign to stdout
+ * Return: 1 (always)
+ */
+int print_percent(void)
+{
+putchar('%');
+return (1);
+}
+
+/**
  * _printf - Print formatted output to stdout
  * @format: The format string
- * Return: numb of chars printed (excluding null byte)
+ * Return: The number of characters printed (excluding null byte)
  */
 int _printf(const char *format, ...)
 {
 int count = 0;
 va_list args;
 va_start(args, format);
+
 while (*format != '\0')
 {
 if (*format == '%')
@@ -19,36 +60,24 @@ if (*format == '%')
 format++;
 if (*format == 'c')
 {
-char c = (char) va_arg(args, int);
-putchar(c);
-count++;
+count += print_char((char) va_arg(args, int));
 }
 else if (*format == 's')
 {
-char *s = va_arg(args, char *);
-while (*s != '\0')
-{
-putchar(*s);
-count++;
-s++;
-}
+count += print_str(va_arg(args, char *));
 }
 else if (*format == '%')
 {
-putchar('%');
-count++;
+count += print_percent();
 }
 else
 {
 printf("Error: Invalid conversion specifier");
-return -1;
+return (-1);
 }
 }
 else
-{
-putchar(*format);
-count++;
-}
+count += print_char(*format);
 format++;
 }
 va_end(args);
