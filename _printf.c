@@ -1,149 +1,56 @@
 #include "main.h"
-
-#define BUFFER_SIZE 1024
+#include <stdarg.h>
+#include <stdio.h>
 
 /**
- * _printf - prints formatted output to stdout
- * @format: format string
- * Return: input of characters printed
+ * _printf - Print formatted output to stdout
+ * @format: The format string
+ * Return: numb of chars printed (excluding null byte)
  */
 int _printf(const char *format, ...)
 {
-int i, j;
-int output = 0;
-int width;
-char padding;
-
+int count = 0;
 va_list args;
 va_start(args, format);
-
 while (*format != '\0')
 {
 if (*format == '%')
 {
 format++;
-
-width = 0;
-padding = ' ';
-
-if (padding == '-' && width > 0)
+if (*format == 'c')
 {
-putchar(*format);
-output++;
-for (i = 1; i < width; i++)
-{
-putchar(' ');
-output++;
+char c = (char) va_arg(args, int);
+putchar(c);
+count++;
 }
-}
-
-if (padding == '0' && width > 0)
+else if (*format == 's')
 {
-putchar(*format);
-output++;
-for (i = 1; i < width; i++)
+char *s = va_arg(args, char *);
+while (*s != '\0')
 {
-putchar(' ');
-output++;
-}
-}
-
-if (padding == '.' && width > 0)
-{
-putchar(*format);
-output++;
-for (i = 1; i < width; i++)
-{
-putchar(' ');
-output++;
-}
-}
-
-if (*format == 's')
-{
-const char *str = va_arg(args, const char *);
-output += printf("%s", str);
-}
-else if (*format == 'c')
-{
-int c = va_arg(args, int);
-output += printf("%c", c);
-}
-else if (*format == 'd' || *format == 'i')
-{
-int input = va_arg(args, int);
-output += printf("%d", input);
-}
-else if (*format == 'u')
-{
-unsigned int input = va_arg(args, unsigned int);
-output += printf("%u", input);
-}
-else if (*format == 'o')
-{
-unsigned int input = va_arg(args, unsigned int);
-output += printf("%o", input);
-}
-else if (*format == 'x')
-{
-unsigned int input = va_arg(args, unsigned int);
-output += printf("%x", input);
-}
-else if (*format == 'X')
-{
-unsigned int input = va_arg(args, unsigned int);
-output += printf("%X", input);
-}
-else if (*format == 'p')
-{
-void *ptr = va_arg(args, void *);
-output += printf("%p", ptr);
-}
-else if (*format == 'b')
-{
-unsigned int input = va_arg(args, unsigned int);
-int binary[32], i = 0;
-
-if (input == 0)
-{
-output += printf("%u", input);
-}
-while (input > 0)
-{
-binary[i] = input % 2;
-input /= 2;
-i++;
-}
-for (j = i - 1; j >= 0; j--)
-{
-output += printf("%d", binary[j]);
-}
-}
-else if (*format == 'r')
-{
-const char *str = va_arg(args, const char *);
-int len = strlen(str);
-for (i = len - 1; i >= 0; i--)
-{
-output += printf("%s", str[i]);
+putchar(*s);
+count++;
+s++;
 }
 }
 else if (*format == '%')
 {
-output += printf("%%");
+putchar('%');
+count++;
 }
-else{
-output += printf("%s", format);
+else
+{
+printf("Error: Invalid conversion specifier");
+return -1;
 }
 }
 else
 {
 putchar(*format);
-output++;
+count++;
 }
 format++;
 }
 va_end(args);
-return (output);
+return (count);
 }
-
