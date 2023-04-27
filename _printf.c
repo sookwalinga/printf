@@ -103,6 +103,11 @@ else if (*format == 'b')
 {
 unsigned int num = va_arg(args, unsigned int);
 int binary[32], i = 0;
+
+if(num == 0)
+{
+output += printf("%u", num);
+}
 while (num > 0)
 {
 binary[i] = num % 2;
