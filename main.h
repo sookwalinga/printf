@@ -16,11 +16,8 @@ int _printS(const char *format, ...);
 
 int write_buffered(char *str);
 
-<<<<<<< HEAD
 void print_hex(unsigned char num);
-=======
-// For task No. 5.
->>>>>>> 1ce9f989994a083ecf361461d809d086e608dcb2
+
 int _printHex(const char *format, ...);
 
-#endif /* MAIN_H */
+#endif
