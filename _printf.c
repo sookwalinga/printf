@@ -13,6 +13,8 @@ int i, j;
 int output = 0;
 int width;
 char padding;
+char specifier = '\0';
+int flag_plus = 0;
 
 va_list args;
 va_start(args, format);
@@ -25,6 +27,21 @@ format++;
 
 width = 0;
 padding = ' ';
+
+if (*format == '+' && specifier != 'c' && specifier != 's')
+{
+flag_plus = 1;
+format++;
+}
+
+if (*format == ' ' && specifier != 'c' && specifier != 's')
+{
+if (!flag_plus)
+{
+output += putchar(' ');
+}
+format++;
+}
 
 if (padding == '-' && width > 0)
 {
