@@ -15,7 +15,7 @@ char *format_with_zero_flag(const char *format, int value)
 char *output;
 int has_zero_flag = 0;
 int i;
-// Determine if the 0 flag character is present
+
 for (i = 0; format[i] != '\0'; i++) 
 {
 if (format[i] == '0' && i == 0) 
@@ -45,7 +45,7 @@ break;
 }
 }
 }
-// Format the output string with the 0 flag character, if applicable
+
 if (has_zero_flag) 
 {
 output = (char *) malloc(12 * sizeof(char));

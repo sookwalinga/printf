@@ -43,6 +43,4 @@ int handle_reversed_string(va_list args);
 
 int handle_width(const char *format, int *i, va_list list);
 
-// void *reverse_string(const char *str);
-
-#endif /*MAIN_H*/
+#endif
