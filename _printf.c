@@ -69,7 +69,11 @@ else if (*format == 'S')
 char *str = va_arg(args, char *);
 while (*str != '\0')
 {
-if (isprint(*str))
+if (*str == '\n')
+{
+output += printf("\\n");
+}
+else if (isprint(*str))
 {
 output += putchar(*str);
 }
