@@ -121,12 +121,7 @@ output += printf("%d", binary[j]);
 }
 else if (*format == 'r')
 {
-const char *str = va_arg(args, const char *);
-int len = strlen(str);
-for (i = len - 1; i >= 0; i--)
-{
-output += printf("%s", str[i]);
-}
+output += printf("%%r");
 }
 else if (*format == '%')
 {
