@@ -29,4 +29,6 @@ int print_pointer(void *ptr);
 
 int handle_flags(const char *format, int *i);
 
+void print_number(char format, char length_modifier, long number);
+
 #endif /*MAIN_H*/
