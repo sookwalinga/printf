@@ -39,6 +39,8 @@ int handle_zero_flag(const char *format, int *i, va_list list, char specifier);
 
 char *format_with_zero_flag(const char *format, int value);
 
+char *handle_flag_minus(const char *format, char specifier);
+
 int handle_reversed_string(va_list args);
 
 int handle_width(const char *format, int *i, va_list list);
