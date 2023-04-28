@@ -22,7 +22,8 @@ if (format[i] == '0' && i == 0)
 {
 has_zero_flag = 1;
 break;
-} else if (format[i] == '%') 
+} 
+else if (format[i] == '%') 
 {
 i++;
 while (format[i] != '\0') 
@@ -31,7 +32,8 @@ if (format[i] == '0')
 {
 has_zero_flag = 1;
 break;
-} else if (format[i] == 'd' || format[i] == 'f') 
+} 
+else if (format[i] == 'd' || format[i] == 'f') 
 {
 break;
 }
