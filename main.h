@@ -31,6 +31,8 @@ int handle_flags(const char *format, int *i);
 
 void print_number(char format, char length_modifier, long number);
 
+int handle_precision(const char *format, int *start_i, va_list args);
+
 int handle_reversed_string(va_list args);
 
 int handle_width(const char *format, int *i, va_list list);
