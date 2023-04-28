@@ -64,6 +64,23 @@ if (*format == 's')
 const char *str = va_arg(args, const char *);
 output += printf("%s", str);
 }
+else if (*format == 'S')
+{
+char *str = va_arg(args, char *);
+while (*str != '\0')
+{
+if (isprint(*str))
+{
+output += putchar(*str);
+}
+else
+{
+output += printf("\\x%02X", (unsigned char)*str);
+}
+str++;
+}
+format++;
+}
 else if (*format == 'c')
 {
 int c = va_arg(args, int);
@@ -127,7 +144,8 @@ else if (*format == '%')
 {
 output += printf("%%");
 }
-else{
+else
+{
 output += printf("%s", format);
 }
 }
