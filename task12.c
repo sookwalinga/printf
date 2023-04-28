@@ -1,11 +1,11 @@
 #include "main.h"
 #include <stdarg.h>
 /**
- * handle_flag_minus - Handles the "-" flag character for non-custom conversion specifiers
+ * handle_flag_minus - Handles "-" flag char for non-custom conversion specifiers
  * @format: A format string containing the conversion specifier to handle
  * @specifier: The current conversion specifier being handled
  *
- * Return: The updated format string with the "-" flag applied to the current specifier
+ * Return: The updated format string with "-" flag applied to current specifier
  */
 char *handle_flag_minus(const char *format, char specifier)
 {
