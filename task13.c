@@ -40,5 +40,5 @@ char *str = va_arg(args, char *);
 int len = strlen(str);
 
 reverse_string(str);
-return fwrite(str, 1, len, stdout);
+return (fwrite(str, 1, len, stdout));
 }
