@@ -1,55 +1,19 @@
 #include "main.h"
-#include <stdarg.h>
-#include <stdio.h>
+
+#define BUFFER_SIZE 1024
 
 /**
- * print_char - Print a single character to stdout
- * @c: The character to print
- * Return: 1 (always)
- */
-int print_char(char c)
-{
-putchar(c);
-return (1);
-}
-
-/**
- * print_str - Print a string to stdout
- * @str: The string to print
- * Return: The number of characters printed
- */
-int print_str(char *str)
-{
-int count = 0;
-
-while (*str != '\0')
-{
-putchar(*str);
-count++;
-str++;
-}
-
-return (count);
-}
-
-/**
- * print_percent - Print a percent sign to stdout
- * Return: 1 (always)
- */
-int print_percent(void)
-{
-putchar('%');
-return (1);
-}
-
-/**
- * _printf - Print formatted output to stdout
- * @format: The format string
- * Return: The number of characters printed (excluding null byte)
+ * _printf - prints formatted output to stdout
+ * @format: format string
+ * Return: input of characters printed
  */
 int _printf(const char *format, ...)
 {
-int count = 0;
+int i, j;
+int output = 0;
+int width;
+char padding;
+
 va_list args;
 va_start(args, format);
 
@@ -58,28 +22,127 @@ while (*format != '\0')
 if (*format == '%')
 {
 format++;
-if (*format == 'c')
+
+width = 0;
+padding = ' ';
+
+if (padding == '-' && width > 0)
 {
-count += print_char((char) va_arg(args, int));
+putchar(*format);
+output++;
+for (i = 1; i < width; i++)
+{
+putchar(' ');
+output++;
 }
-else if (*format == 's')
+}
+
+if (padding == '0' && width > 0)
 {
-count += print_str(va_arg(args, char *));
+putchar(*format);
+output++;
+for (i = 1; i < width; i++)
+{
+putchar(' ');
+output++;
+}
+}
+
+if (padding == '.' && width > 0)
+{
+putchar(*format);
+output++;
+for (i = 1; i < width; i++)
+{
+putchar(' ');
+output++;
+}
+}
+
+if (*format == 's')
+{
+const char *str = va_arg(args, const char *);
+output += printf("%s", str);
+}
+else if (*format == 'c')
+{
+int c = va_arg(args, int);
+output += printf("%c", c);
+}
+else if (*format == 'd' || *format == 'i')
+{
+int input = va_arg(args, int);
+output += printf("%d", input);
+}
+else if (*format == 'u')
+{
+unsigned int input = va_arg(args, unsigned int);
+output += printf("%u", input);
+}
+else if (*format == 'o')
+{
+unsigned int input = va_arg(args, unsigned int);
+output += printf("%o", input);
+}
+else if (*format == 'x')
+{
+unsigned int input = va_arg(args, unsigned int);
+output += printf("%x", input);
+}
+else if (*format == 'X')
+{
+unsigned int input = va_arg(args, unsigned int);
+output += printf("%X", input);
+}
+else if (*format == 'p')
+{
+void *ptr = va_arg(args, void *);
+output += printf("%p", ptr);
+}
+else if (*format == 'b')
+{
+unsigned int input = va_arg(args, unsigned int);
+int binary[32], i = 0;
+
+if (input == 0)
+{
+output += printf("%u", input);
+}
+while (input > 0)
+{
+binary[i] = input % 2;
+input /= 2;
+i++;
+}
+for (j = i - 1; j >= 0; j--)
+{
+output += printf("%d", binary[j]);
+}
+}
+else if (*format == 'r')
+{
+const char *str = va_arg(args, const char *);
+int len = strlen(str);
+for (i = len - 1; i >= 0; i--)
+{
+output += printf("%s", str[i]);
+}
 }
 else if (*format == '%')
 {
-count += print_percent();
+output += printf("%%");
+}
+else{
+output += printf("%s", format);
+}
 }
 else
 {
-printf("Error: Invalid conversion specifier");
-return (-1);
+putchar(*format);
+output++;
 }
-}
-else
-count += print_char(*format);
 format++;
 }
 va_end(args);
-return (count);
+return (output);
 }
