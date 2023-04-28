@@ -29,16 +29,15 @@ right--;
 
 /**
  * handle_reversed_string - Handles the custom conversion specifier %r.
- * @format: The format string.
  * @args: The variable argument list.
  *
  * Return: The number of characters printed.
  */
-int handle_reversed_string(const char *format, va_list args)
+int handle_reversed_string(va_list args)
 {
 char *str = va_arg(args, char *);
 int len = strlen(str);
 
 reverse_string(str);
-return (fwrite(str, 1, len, stdout));
+return fwrite(str, 1, len, stdout);
 }
