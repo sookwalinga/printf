@@ -31,6 +31,10 @@ int print_pointer(void *ptr);
 
 int handle_flags(const char *format, int *i);
 
+void print_number(char format, char length_modifier, long number);
+
+int handle_width(const char *format, int *i, va_list list);
+
 char *reverse_string(const char *str);
 
 #endif /*MAIN_H*/
